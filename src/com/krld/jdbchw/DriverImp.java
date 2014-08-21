@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 /**
  * Created by Andrey on 8/22/2014.
  */
-public class driver implements java.sql.Driver {
+public class DriverImp implements java.sql.Driver {
     @Override
     public Connection connect(String url, Properties info) throws SQLException {
         HWConnection conn = new HWConnection();
