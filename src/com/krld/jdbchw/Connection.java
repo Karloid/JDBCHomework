@@ -8,7 +8,7 @@ import java.util.concurrent.Executor;
 /**
  * Created by Andrey on 8/22/2014.
  */
-public class HWConnection implements Connection {
+public class Connection implements java.sql.Connection {
     @Override
     public Statement createStatement() throws SQLException {
         return null;
