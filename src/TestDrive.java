@@ -13,7 +13,7 @@ public class TestDrive {
 
     private static void testJDBC() throws Exception {
         System.out.println("TODO test JDBC...");
-        Class.forName("com.krld.jdbchw.Driver");
+        Class.forName("com.krld.jdbchw.driver");
         Connection conn = DriverManager.getConnection("jdbc:hw:test");
         Statement stat = conn.createStatement();
         ResultSet rs = stat.executeQuery("select * from soldiers");
