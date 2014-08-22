@@ -59,6 +59,6 @@ public class Driver implements java.sql.Driver {
     }
 
     public static void log(String s) {
-        System.out.println("Driver: " + s);
+        System.out.println("+Driver: " + s);
     }
 }

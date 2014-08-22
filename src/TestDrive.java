@@ -42,12 +42,12 @@ public class TestDrive {
         ResultSet tables = metaData.getTables("", "", "", tableTypesStr.toArray(new String[]{}));
         log("Get table names...");
         while (tables.next()) {
-            log("..table name: " + tables.getString(0) + " table type: " + tables.getString(1));
+            log("..table name: " + tables.getString(0) + ", table type: " + tables.getString(1));
         }
     }
 
     private static void log(String s) {
-        System.out.println("testDrive: " + s);
+        System.out.println(">TestDrive: " + s);
     }
 
 
