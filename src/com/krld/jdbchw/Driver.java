@@ -19,15 +19,18 @@ public class Driver implements java.sql.Driver {
             e.printStackTrace();
         }
     }
+
+    public static final String URL_START = "jdbc:hw:";
+
     @Override
     public java.sql.Connection connect(String url, Properties info) throws SQLException {
-        Connection conn = new Connection();
+        Connection conn = new Connection(url, info);
         return conn;
     }
 
     @Override
     public boolean acceptsURL(String url) throws SQLException {
-        return true;
+        return url.indexOf(URL_START) != -1;
     }
 
     @Override
@@ -53,5 +56,9 @@ public class Driver implements java.sql.Driver {
     @Override
     public Logger getParentLogger() throws SQLFeatureNotSupportedException {
         return null;
+    }
+
+    public static void log(String s) {
+        System.out.println("Driver: " + s);
     }
 }

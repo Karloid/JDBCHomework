@@ -1,5 +1,6 @@
 package com.krld.jdbchw;
 
+import java.io.File;
 import java.sql.*;
 import java.util.Map;
 import java.util.Properties;
@@ -9,6 +10,28 @@ import java.util.concurrent.Executor;
  * Created by Andrey on 8/22/2014.
  */
 public class Connection implements java.sql.Connection {
+    private final String url;
+    private final Properties info;
+    private final String dbPath;
+
+    public Connection(String url, Properties info) {
+        this.url = url;
+        this.info = info;
+        dbPath = url.replaceAll(Driver.URL_START, "");
+        createDbFolderIfNoExists();
+    }
+
+    private void createDbFolderIfNoExists() {
+        File dbFolder = new File(dbPath);
+        if (!dbFolder.exists()) {
+            dbFolder.mkdirs();
+            Driver.log("Folder " + dbPath + " created");
+        } else {
+            Driver.log("Folder " + dbPath + " exists");
+        }
+    }
+
+
     @Override
     public Statement createStatement() throws SQLException {
         return null;
@@ -61,7 +84,7 @@ public class Connection implements java.sql.Connection {
 
     @Override
     public DatabaseMetaData getMetaData() throws SQLException {
-        return null;
+        return new DataBaseMetaData(dbPath, info);
     }
 
     @Override
