@@ -19,25 +19,31 @@ public class TestDrive {
 
         Connection conn = DriverManager.getConnection(url);
         printTables(conn);
-        Statement stat = conn.createStatement();
-/*        ResultSet rs = stat.executeQuery("select * from soldiers");
-        while (rs.next()) {
-            System.out.println("name = " + rs.getString("name"));
-        }
-        rs.close(); */
+        printTablesContent(conn);
         conn.close();
+    }
+
+    private static void printTablesContent(Connection conn) throws SQLException {
+        Statement stat = conn.createStatement();
+        String query = "select * from soldiers  ";
+        log("Execute query: " + query);
+        ResultSet rs = stat.executeQuery(query);
+        log("Result set values... ");
+        log("..|    COL    |");
+        while (rs.next()) {
+            log(".." + rs.getString("COL"));
+        }
+        rs.close();
     }
 
     private static void printTables(Connection conn) throws SQLException {
         DatabaseMetaData metaData = conn.getMetaData();
         ResultSet tableTypes = metaData.getTableTypes();
         List<String> tableTypesStr = new ArrayList<String>();
-        int index = 0;
         log("Get table types...");
         while (tableTypes.next()) {
             log("..table type: " + tableTypes.getString(0));
             tableTypesStr.add(tableTypes.getString(0));
-            index++;
         }
         ResultSet tables = metaData.getTables("", "", "", tableTypesStr.toArray(new String[]{}));
         log("Get table names...");

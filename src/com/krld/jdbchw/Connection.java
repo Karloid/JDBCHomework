@@ -33,8 +33,8 @@ public class Connection implements java.sql.Connection {
 
 
     @Override
-    public Statement createStatement() throws SQLException {
-        return null;
+    public java.sql.Statement createStatement() throws SQLException {
+        return new Statement(dbPath, info);
     }
 
     @Override
@@ -128,7 +128,7 @@ public class Connection implements java.sql.Connection {
     }
 
     @Override
-    public Statement createStatement(int resultSetType, int resultSetConcurrency) throws SQLException {
+    public java.sql.Statement createStatement(int resultSetType, int resultSetConcurrency) throws SQLException {
         return null;
     }
 
@@ -183,7 +183,7 @@ public class Connection implements java.sql.Connection {
     }
 
     @Override
-    public Statement createStatement(int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
+    public java.sql.Statement createStatement(int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
         return null;
     }
 
