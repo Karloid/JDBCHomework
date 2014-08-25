@@ -1,5 +1,6 @@
 package com.krld.jdbchw;
 
+import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;
 import java.math.BigDecimal;
@@ -17,6 +18,7 @@ import java.util.Map;
 public class SelectResultSet implements ResultSet {
     private int currentIndex = -1;
     private List<String> rows;
+    private File file;
 
     public SelectResultSet() {
         rows = new ArrayList<String>();
@@ -612,8 +614,8 @@ public class SelectResultSet implements ResultSet {
     }
 
     @Override
-    public Clob getClob(int columnIndex) throws SQLException {
-        return null;
+    public java.sql.Clob getClob(int columnIndex) throws SQLException {
+        return getClob("COL");
     }
 
     @Override
@@ -637,8 +639,8 @@ public class SelectResultSet implements ResultSet {
     }
 
     @Override
-    public Clob getClob(String columnLabel) throws SQLException {
-        return null;
+    public java.sql.Clob getClob(String columnLabel) throws SQLException {
+        return new Clob(file);
     }
 
     @Override
@@ -707,12 +709,12 @@ public class SelectResultSet implements ResultSet {
     }
 
     @Override
-    public void updateClob(int columnIndex, Clob x) throws SQLException {
+    public void updateClob(int columnIndex, java.sql.Clob x) throws SQLException {
 
     }
 
     @Override
-    public void updateClob(String columnLabel, Clob x) throws SQLException {
+    public void updateClob(String columnLabel, java.sql.Clob x) throws SQLException {
 
     }
 
@@ -988,5 +990,14 @@ public class SelectResultSet implements ResultSet {
 
     public void addRow(String row) {
         rows.add(row);
+    }
+
+
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    public File getFile() {
+        return file;
     }
 }

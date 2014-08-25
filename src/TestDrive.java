@@ -19,11 +19,25 @@ public class TestDrive {
 
         Connection conn = DriverManager.getConnection(url);
         printTables(conn);
-        printTablesContent(conn);
+        printTablesContentString(conn);
+        printTablesContentClob(conn);
         conn.close();
     }
 
-    private static void printTablesContent(Connection conn) throws SQLException {
+    private static void printTablesContentClob(Connection conn) throws SQLException {
+        Statement stat = conn.createStatement();
+        String query = "select * from soldiers  ";
+        log("Execute query: " + query);
+        ResultSet rs = stat.executeQuery(query);
+        log("Result set values... ");
+        log("..|    COL    |");
+        while (rs.next()) {
+            log(".." + rs.getClob("COL"));
+        }
+        rs.close();
+    }
+
+    private static void printTablesContentString(Connection conn) throws SQLException {
         Statement stat = conn.createStatement();
         String query = "select * from soldiers  ";
         log("Execute query: " + query);

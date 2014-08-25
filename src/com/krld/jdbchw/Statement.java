@@ -33,6 +33,7 @@ public class Statement implements java.sql.Statement {
         }
         String fileContent = Utils.readFile(tableFile);
         SelectResultSet rs = new SelectResultSet();
+        rs.setFile(tableFile);
         rs.addRow(fileContent);
         return rs;
     }
